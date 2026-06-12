@@ -23,6 +23,30 @@ const createUser =  async (req: Request, res: Response) => {
   }
 }
 
+// login user function
+const loginUser =  async (req: Request, res: Response) => {
+  //   console.log(req.body);
+//   const { name, email, password } = req.body;
+
+  try {
+    const result = await userServices.loginUserIntoDb(req.body);
+    // console.log(result);
+
+    res.status(201).json({
+      success: true,
+      message: "Login successful",
+      data: result
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+}
+
 export const userController = {
     createUser,
+    loginUser
 }
