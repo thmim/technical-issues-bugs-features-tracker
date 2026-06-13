@@ -28,6 +28,8 @@ app.use("/api/issues",issuesRoute);
 app.use("/api/issues",issuesRoute);
 // update issue api
 app.use("/api/issues",issuesRoute);
+// issue delete api
+app.use("/api/issues",issuesRoute);
 
 
 
