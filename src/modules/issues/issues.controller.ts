@@ -33,6 +33,21 @@ const payload = {
 // get all issues response
 const getAllIssues = async (req: Request, res: Response) =>{
 
+// console.log(result)
+try {
+  const data = await issuesService.getAllIssuesFromDb();
+  res.status(201).json({
+      success: true,
+      message: "Issues retrived successfully",
+      data: data
+    });
+} catch (error:any) {
+  res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+}
 }
 
 export const issuesController = {
