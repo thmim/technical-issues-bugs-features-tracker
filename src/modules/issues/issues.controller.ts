@@ -1,13 +1,19 @@
 import type { Request, Response } from "express";
 import { issuesService } from "./issues.service";
 
+// create issue response
 const createIssues = async (req: Request, res: Response) => {
-  //   console.log(req.body);
+    console.log(req.body);
+    console.log(req.user?.id);
 //   const { name, email, password } = req.body;
+const payload = {
+  ...req.body,
+  reporter_id:req.user?.id
+}
 
   try {
-    const result = await issuesService.createIssuesIntoDb(req.body)
-    // console.log(result);
+    const result = await issuesService.createIssuesIntoDb(payload)
+    console.log("reqq theke",result);
 
     res.status(201).json({
       success: true,
@@ -24,6 +30,12 @@ const createIssues = async (req: Request, res: Response) => {
 
 }
 
+// get all issues response
+const getAllIssues = async (req: Request, res: Response) =>{
+
+}
+
 export const issuesController = {
     createIssues,
+    getAllIssues
 }
