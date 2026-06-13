@@ -3,17 +3,17 @@ import { issuesService } from "./issues.service";
 
 // create issue response
 const createIssues = async (req: Request, res: Response) => {
-    console.log(req.body);
-    console.log(req.user?.id);
-//   const { name, email, password } = req.body;
-const payload = {
-  ...req.body,
-  reporter_id:req.user?.id
-}
+  console.log(req.body);
+  console.log(req.user?.id);
+  //   const { name, email, password } = req.body;
+  const payload = {
+    ...req.body,
+    reporter_id: req.user?.id
+  }
 
   try {
     const result = await issuesService.createIssuesIntoDb(payload)
-    console.log("reqq theke",result);
+    console.log("reqq theke", result);
 
     res.status(201).json({
       success: true,
@@ -31,26 +31,57 @@ const payload = {
 }
 
 // get all issues response
-const getAllIssues = async (req: Request, res: Response) =>{
-
-// console.log(result)
-try {
-  const data = await issuesService.getAllIssuesFromDb();
-  res.status(201).json({
+const getAllIssues = async (req: Request, res: Response) => {
+  const sort = req.query.sort as string;
+  // console.log(result)
+  try {
+    const data = await issuesService.getAllIssuesFromDb(sort);
+    res.status(201).json({
       success: true,
       message: "Issues retrived successfully",
       data: data
     });
-} catch (error:any) {
-  res.status(500).json({
+  } catch (error: any) {
+    res.status(500).json({
       success: false,
       message: error.message,
       error: error,
     });
+  }
 }
+
+// get single issue response
+const getSingleIssue = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  // console.log(id)
+  try {
+    const data = await issuesService.getSingleIssueFromDb(id as string)
+
+    if (data.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Issue not found",
+        data: {}
+      })
+    }
+
+    res.status(201).json({
+      success: true,
+      message: "Issue retrived successfully",
+      data: data
+    })
+
+
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+      error: error
+    })
+  }
 }
 
 export const issuesController = {
-    createIssues,
-    getAllIssues
+  createIssues,
+  getAllIssues,
+  getSingleIssue
 }

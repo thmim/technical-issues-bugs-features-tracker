@@ -24,6 +24,8 @@ app.use("/api/auth",userRoute);
 app.use("/api/issues",issuesRoute);
 // get all issues api
 app.use("/api/issues",issuesRoute);
+// get single issue api
+app.use("/api/issues",issuesRoute);
 
 
 

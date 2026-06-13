@@ -8,5 +8,7 @@ const router = Router();
 router.post("/", auth() , issuesController.createIssues);
 // all issues get api
 router.get("/",issuesController.getAllIssues);
+// get single issue
+router.get("/:id",issuesController.getSingleIssue);
 
 export const issuesRoute = router;
