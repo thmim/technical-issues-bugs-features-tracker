@@ -26,6 +26,8 @@ app.use("/api/issues",issuesRoute);
 app.use("/api/issues",issuesRoute);
 // get single issue api
 app.use("/api/issues",issuesRoute);
+// update issue api
+app.use("/api/issues",issuesRoute);
 
 
 

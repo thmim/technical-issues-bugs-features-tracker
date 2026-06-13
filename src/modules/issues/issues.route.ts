@@ -10,5 +10,7 @@ router.post("/", auth() , issuesController.createIssues);
 router.get("/",issuesController.getAllIssues);
 // get single issue
 router.get("/:id",issuesController.getSingleIssue);
+// update issue route
+router.patch("/:id",issuesController.updateIssue);
 
 export const issuesRoute = router;
