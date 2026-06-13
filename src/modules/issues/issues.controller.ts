@@ -3,8 +3,8 @@ import { issuesService } from "./issues.service";
 
 // create issue response
 const createIssues = async (req: Request, res: Response) => {
-  console.log(req.body);
-  console.log(req.user?.id);
+  // console.log(req.body);
+  // console.log(req.user?.id);
   //   const { name, email, password } = req.body;
   const payload = {
     ...req.body,
@@ -13,7 +13,7 @@ const createIssues = async (req: Request, res: Response) => {
 
   try {
     const result = await issuesService.createIssuesIntoDb(payload)
-    console.log("reqq theke", result);
+    // console.log("reqq theke", result);
 
     res.status(201).json({
       success: true,
@@ -82,8 +82,43 @@ const getSingleIssue = async (req: Request, res: Response) => {
 
 // update issue response
 const updateIssue = async (req: Request, res: Response) =>{
+  const user = req.user;
   const { id } = req.params;
+  
     try {
+      // get existing issue
+    const existingIssue =
+      await issuesService.getSingleIssueFromDb(id as string);
+      // console.log(existingIssue[0]?.status)
+
+    if (!existingIssue) {
+      return res.status(404).json({
+        success: false,
+        message: "Issue not found",
+      });
+    }
+
+    // Contributor rules
+    if (user?.role === "contributor") {
+
+      // Can update only own issue
+      if (existingIssue[0]?.reporter.id !== user.id) {
+        return res.status(403).json({
+          success: false,
+          message: "You can update your own issues",
+        });
+      }
+
+      // update only if status is open
+      if (existingIssue[0]?.status !== "open") {
+        return res.status(403).json({
+          success: false,
+          message: "you have no access",
+        });
+      }
+    }
+
+    // here is the update response
     const result = await issuesService.updateIssueFromDb(
       id as string,
       req.body

@@ -2,7 +2,9 @@ import type { NextFunction, Request, Response } from "express"
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { pool } from "../db";
-const auth = () => {
+import type { ROLES } from "../types";
+const auth = (...roles: ROLES[]) => {
+    // console.log(roles)
     return async (req: Request, res: Response, next: NextFunction) => {
         // console.log(req.headers.authorization);
         const token = req.headers.authorization;
@@ -24,7 +26,8 @@ const auth = () => {
 
             const user = userData.rows[0];
 
-            // console.log(user);
+
+            console.log(user);
             // check user exist or not
             if (userData.rows.length === 0) {
                 return res.status(404).json({
@@ -32,15 +35,24 @@ const auth = () => {
                     message: "User not found!",
                 });
             }
+
+            // role check
+            if (roles.length && !roles.includes(user.role)) {
+                return res.status(403).json({
+                    success: false,
+                    message: "Forbidden!!",
+                });
+            }
+
             req.user = decoded;
 
             next();
         } catch (error) {
             // next(error);
             return res.status(401).json({
-        success: false,
-        message: "Invalid Token",
-      });
+                success: false,
+                message: "Invalid Token",
+            });
         }
 
 
