@@ -47,11 +47,8 @@ const auth = (...roles: ROLES[]) => {
 
             next();
         } catch (error) {
-            // next(error);
-            return res.status(401).json({
-                success: false,
-                message: "Invalid Token",
-            });
+            next(error);
+            
         }
 
 
