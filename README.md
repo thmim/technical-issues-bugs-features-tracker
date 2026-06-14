@@ -110,7 +110,3 @@ Combine filters:
 GET /issues?type=bug&status=open
 ```
 
-
-
-
-This project is licensed under the MIT License.
