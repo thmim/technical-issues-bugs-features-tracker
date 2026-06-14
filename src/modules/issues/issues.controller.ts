@@ -3,9 +3,8 @@ import { issuesService } from "./issues.service";
 
 // create issue response
 const createIssues = async (req: Request, res: Response) => {
-  // console.log(req.body);
-  // console.log(req.user?.id);
-  //   const { name, email, password } = req.body;
+  
+  // all necessary data (issue data from req.body and user data from req.user) set in one variable
   const payload = {
     ...req.body,
     reporter_id: req.user?.id
@@ -13,7 +12,6 @@ const createIssues = async (req: Request, res: Response) => {
 
   try {
     const result = await issuesService.createIssuesIntoDb(payload)
-    // console.log("reqq theke", result);
 
     res.status(201).json({
       success: true,
@@ -32,10 +30,23 @@ const createIssues = async (req: Request, res: Response) => {
 
 // get all issues response
 const getAllIssues = async (req: Request, res: Response) => {
-  const sort = req.query.sort as string;
+  const {sort,status,type} = req.query;
   // console.log(result)
   try {
-    const data = await issuesService.getAllIssuesFromDb(sort);
+    const data = await issuesService.getAllIssuesFromDb({
+      sort:sort as string,
+      status:status as string,
+      type:type as string
+    });
+    
+    if(data.length === 0){
+      return res.status(404).json({
+      success: false,
+      message: "Issues not found",
+      data: data
+    });
+    }
+
     res.status(201).json({
       success: true,
       message: "Issues retrived successfully",
@@ -84,13 +95,12 @@ const getSingleIssue = async (req: Request, res: Response) => {
 const updateIssue = async (req: Request, res: Response) =>{
   const user = req.user;
   const { id } = req.params;
-  console.log("user-id:",user?.id)
+  // console.log(user?.id)
   
     try {
-      // get existing issue
+      // get existing issue for matching role and ids condition
     const existingIssue =
       await issuesService.getSingleIssueFromDb(id as string);
-      console.log("reporterid:",existingIssue[0]?.reporter.id)
 
     if (!existingIssue) {
       return res.status(404).json({

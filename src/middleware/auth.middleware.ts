@@ -3,10 +3,11 @@ import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { pool } from "../db";
 import type { ROLES } from "../types";
+
+
 const auth = (...roles: ROLES[]) => {
-    // console.log(roles)
+
     return async (req: Request, res: Response, next: NextFunction) => {
-        // console.log(req.headers.authorization);
         const token = req.headers.authorization;
         // console.log(token)
         try {
@@ -26,8 +27,6 @@ const auth = (...roles: ROLES[]) => {
 
             const user = userData.rows[0];
 
-
-            console.log(user);
             // check user exist or not
             if (userData.rows.length === 0) {
                 return res.status(404).json({
@@ -37,7 +36,6 @@ const auth = (...roles: ROLES[]) => {
             }
 
             // role check
-            console.log("auth theke",roles.length && !roles.includes(user.role))
             if (roles.length && !roles.includes(user.role)) {
                 return res.status(403).json({
                     success: false,

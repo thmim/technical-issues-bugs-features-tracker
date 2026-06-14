@@ -3,8 +3,12 @@ import { userController } from "./auth.controller";
 
 
 const router = Router();
+
+// register route
 router.post("/",userController.createUser);
+
+// login route
 router.post("/login",userController.loginUser);
-// router.post("/");
+
 
 export const userRoute = router;

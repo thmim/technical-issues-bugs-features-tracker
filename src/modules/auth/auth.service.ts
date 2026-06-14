@@ -6,6 +6,7 @@ import config from "../../config";
 
 const createUserIntoDb = async (payload: IUser) => {
     const { name, email, password, role } = payload;
+    // create hash password
     const hash = await bcrypt.hash(password, 10);
 
     const result = await pool.query(
@@ -38,7 +39,7 @@ const loginUserIntoDb = async (payload: IUser) => {
     }
     const user = result.rows[0]
 
-
+    //  check password right or wrong
     const matchPassword = await bcrypt.compare(password, user.password);
     // console.log(matchPassword)
     if (!matchPassword) {
@@ -49,9 +50,9 @@ const loginUserIntoDb = async (payload: IUser) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        role:user.role
+        role: user.role
     }
- delete user.password;
+    delete user.password;
     // create token
     const token = jwt.sign(jwtPayload, config.jwt_secret_key, { expiresIn: '1d' });
     // const userWithOutPassword = delete user.password;

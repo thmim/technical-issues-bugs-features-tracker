@@ -5,11 +5,10 @@ import { issuesRoute } from "./modules/issues/issues.route";
 const app: Application = express();
 app.use(express.json());
 
-
-
+// root api
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({
-        message: "choltece",
+        message: "server running",
         author: "ami"
     })
 })

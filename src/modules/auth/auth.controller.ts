@@ -1,9 +1,7 @@
 import type { Request, Response } from "express";
 import { userServices } from "./auth.service";
 
-const createUser =  async (req: Request, res: Response) => {
-  //   console.log(req.body);
-//   const { name, email, password } = req.body;
+const createUser = async (req: Request, res: Response) => {
 
   try {
     const result = await userServices.createUserIntoDb(req.body)
@@ -24,9 +22,7 @@ const createUser =  async (req: Request, res: Response) => {
 }
 
 // login user function
-const loginUser =  async (req: Request, res: Response) => {
-  //   console.log(req.body);
-//   const { name, email, password } = req.body;
+const loginUser = async (req: Request, res: Response) => {
 
   try {
     const result = await userServices.loginUserIntoDb(req.body);
@@ -47,6 +43,6 @@ const loginUser =  async (req: Request, res: Response) => {
 }
 
 export const userController = {
-    createUser,
-    loginUser
+  createUser,
+  loginUser
 }
