@@ -84,12 +84,13 @@ const getSingleIssue = async (req: Request, res: Response) => {
 const updateIssue = async (req: Request, res: Response) =>{
   const user = req.user;
   const { id } = req.params;
+  console.log("user-id:",user?.id)
   
     try {
       // get existing issue
     const existingIssue =
       await issuesService.getSingleIssueFromDb(id as string);
-      // console.log(existingIssue[0]?.status)
+      console.log("reporterid:",existingIssue[0]?.reporter.id)
 
     if (!existingIssue) {
       return res.status(404).json({
@@ -102,10 +103,11 @@ const updateIssue = async (req: Request, res: Response) =>{
     if (user?.role === "contributor") {
 
       // Can update only own issue
+      console.log(existingIssue[0]?.reporter.id !== user.id)
       if (existingIssue[0]?.reporter.id !== user.id) {
         return res.status(403).json({
           success: false,
-          message: "You can update your own issues",
+          message: "You can update only your own issues",
         });
       }
 

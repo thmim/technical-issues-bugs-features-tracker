@@ -5,12 +5,14 @@ import jwt from "jsonwebtoken";
 import config from "../../config";
 
 const createUserIntoDb = async (payload: IUser) => {
-    const { name, email, password, role = "contributor" } = payload;
+    const { name, email, password, role } = payload;
     const hash = await bcrypt.hash(password, 10);
 
     const result = await pool.query(
         `
-         INSERT INTO users(name,email,password,role) VALUES($1,$2,$3,$4) RETURNING *
+         INSERT INTO users(name,email,password,role) 
+         VALUES($1,$2,$3,COALESCE($4,'contributor')) 
+         RETURNING *
         `,
         [name, email, hash, role],
 

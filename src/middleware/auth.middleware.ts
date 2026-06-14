@@ -37,6 +37,7 @@ const auth = (...roles: ROLES[]) => {
             }
 
             // role check
+            console.log("auth theke",roles.length && !roles.includes(user.role))
             if (roles.length && !roles.includes(user.role)) {
                 return res.status(403).json({
                     success: false,
