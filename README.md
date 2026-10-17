@@ -4,8 +4,9 @@
 
 **BugTracker** is a RESTful backend API built with **Node.js, Express.js, TypeScript and PostgreSQL**. It features secure JWT authentication, role-based access control, and hand-written raw SQL queries (no ORM, no query builder).
 
-🔗 **Live API:** `https://your-live-url.com` <!-- replace with your deployed URL -->
-📦 **GitHub:** `https://github.com/your-username/bugtracker` <!-- replace with your repo URL -->
+- 🔗 **Live API:** `https://technical-issues-bug-tracker-server.vercel.app/`
+- 📦 **GitHub:** `https://github.com/thmim/technical-issues-bugs-features-tracker/tree/main`
+- 📦 **Postman API Collection:** `https://taharimhasan.postman.co/workspace/My-practice~21014123-0987-4e04-b531-1c5aba28607a/collection/45092075-27f750de-94f8-4b80-9334-9ff0cac78d46?action=share&creator=45092075` 
 
 ---
 
@@ -216,7 +217,7 @@ bugtracker/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/bugtracker.git
+git clone https://github.com/thmim/technical-issues-bugs-features-tracker.git
 cd bugtracker
 
 # 2. Install dependencies
@@ -247,7 +248,7 @@ npm run build
 npm start
 ```
 
-The server will start on `http://localhost:5000`.
+The server will start on `http://localhost:3000`.
 
 ---
 
@@ -277,4 +278,4 @@ The server will start on `http://localhost:5000`.
 Full Stack Developer | Khulna, Bangladesh
 
 📧 mdtaharimmim1010@gmail.com
-🔗 [GitHub](https://github.com/your-username) · [LinkedIn](https://linkedin.com/in/your-profile) · [Portfolio](https://your-portfolio.com)
+🔗 [GitHub](https://github.com/thmim) · [LinkedIn](https://www.linkedin.com/in/th-mim10/) · [Portfolio](https://taharim-hasan.vercel.app/)
