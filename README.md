@@ -6,7 +6,7 @@
 
 - 🔗 **Live API:** `https://technical-issues-bug-tracker-server.vercel.app/`
 - 📦 **GitHub:** `https://github.com/thmim/technical-issues-bugs-features-tracker/tree/main`
-- 📦 **Postman API Collection:** `https://taharimhasan.postman.co/workspace/My-practice~21014123-0987-4e04-b531-1c5aba28607a/collection/45092075-27f750de-94f8-4b80-9334-9ff0cac78d46?action=share&creator=45092075` 
+- 📦 **Postman API Collection:** `https://documenter.getpostman.com/view/45092075/2sBYHSxLMV` 
 
 ---
 
