@@ -500,7 +500,7 @@ var globalerror_default = globalErrorHandler;
 var app = express();
 app.use(express.json());
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "https://technical-issues-bug-tracker-server.vercel.app/"
 };
 app.use(cors(corsOptions));
 app.get("/", (req, res) => {

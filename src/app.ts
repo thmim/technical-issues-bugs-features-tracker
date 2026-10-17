@@ -3,10 +3,13 @@ import { userRoute } from "./modules/auth/auth.route";
 import { issuesRoute } from "./modules/issues/issues.route";
 import cors from "cors"
 import globalErrorHandler from "./middleware/globalerror";
+import cookieParser from "cookie-parser";
 const app: Application = express();
 app.use(express.json());
+app.use(cookieParser());
+
 var corsOptions = {
-  origin: 'http://localhost:3000'
+  origin: 'https://technical-issues-bug-tracker-server.vercel.app/'
 }
 app.use(cors(corsOptions));
 

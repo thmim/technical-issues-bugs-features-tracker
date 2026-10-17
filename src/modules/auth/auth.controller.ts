@@ -28,6 +28,14 @@ const loginUser = async (req: Request, res: Response) => {
     const result = await userServices.loginUserIntoDb(req.body);
     // console.log(result);
 
+    // Set cookie after successful login
+    res.cookie("accessToken", result.token, {
+      httpOnly:true,
+    secure:false,
+    sameSite:"none",
+    maxAge:1000*60*60*24,
+    });
+
     res.status(201).json({
       success: true,
       message: "Login successful",

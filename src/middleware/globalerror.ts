@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 
 const globalErrorHandler = (
-  err: any,
+  err: any, // type unknown dileo hobe
   req: Request,
   res: Response,
   next: NextFunction,
